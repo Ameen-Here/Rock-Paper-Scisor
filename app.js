@@ -8,7 +8,9 @@ function computerPlay() {
 function userInput() {
   let isCorrectChoice = false;
   while (!isCorrectChoice) {
-    let playerInput = prompt("What would player like to play").toLowerCase();
+    let playerInput = prompt(
+      "What would player like to play? Look console for results"
+    ).toLowerCase();
     if (!gameChoices.includes(playerInput)) {
       console.log(`Wrong input!!! Try again with Rock or paper or scissor`);
     } else {
@@ -35,7 +37,7 @@ function playGame() {
 }
 
 function printResult(compScore, userScore) {
-  if (compScore < userScore) {
+  if (compScore > userScore) {
     console.log("Computer won!!! Better Luck Next Time.");
   } else if (compScore < userScore) {
     console.log("You won!!! You are a HERO!!!.");
@@ -45,11 +47,16 @@ function printResult(compScore, userScore) {
 }
 
 const game = function game() {
-  let compScore = (userScore = 0);
+  let compScore = 0;
+  let userScore = 0;
   for (let i = 0; i < 5; i++) {
     const result = playGame();
     console.log(result);
-    result[4] === "L" ? compScore++ : userScore++; // Getting the letter L or W of Lose or Win to determine the score.
+    if (result[4] === "L") {
+      compScore++;
+    } else if (result[4] === "W") {
+      userScore++;
+    } // Getting the letter L or W of Lose or Win to determine the score.
   }
   printResult(compScore, userScore);
 };
