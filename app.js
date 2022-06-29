@@ -45,11 +45,13 @@ function printResult(compScore, userScore) {
 }
 
 const game = function game() {
-  let compScore = (userScore = 0);
+  let compScore = 0;
+  let userScore = 0;
   for (let i = 0; i < 5; i++) {
     const result = playGame();
     console.log(result);
-    result[4] === "L" ? compScore++ : userScore++; // Getting the letter L or W of Lose or Win to determine the score.
+    result[4] === "L" ? compScore++;
+    result[4] === "W" ? userScore++;// Getting the letter L or W of Lose or Win to determine the score.
   }
   printResult(compScore, userScore);
 };
