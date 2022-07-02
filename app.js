@@ -61,4 +61,4 @@ const game = function game() {
   printResult(compScore, userScore);
 };
 
-game();
+// game();

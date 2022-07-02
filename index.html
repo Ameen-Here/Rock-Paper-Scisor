@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Rock-Paper-Scissor</title>
     <style>
       body {
@@ -13,10 +14,23 @@
   </head>
   <body>
     <h1>Rock-Paper-Scissor game</h1>
-    <p>
-      Right now under development!!! Please check in the console for playing the
-      game.
-    </p>
+    <div class="score-header">
+      <h2 class="user-header">User Score: <span class="user-score"></span></h2>
+      <h2 class="comp-header">
+        Computer Score: <span class="comp-score"></span>
+      </h2>
+    </div>
+
+    <main class="play-btns">
+      <button class="scissors">Scissors</button>
+      <button class="paper">Paper</button>
+      <button class="rock">Rock</button>
+    </main>
+    <br />
+    <br />
+    <h3 id="result">Computer played result</h3>
+
+    <h3 id="round">Round</h3>
 
     <script src="app.js"></script>
   </body>
