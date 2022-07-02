@@ -19,3 +19,12 @@ button {
 .comp-header {
   margin-top: 2px;
 }
+
+.reset-btn {
+  display: none;
+}
+
+.reset-container {
+  display: flex;
+  justify-content: center;
+}

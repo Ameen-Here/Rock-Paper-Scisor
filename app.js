@@ -1,27 +1,56 @@
 const gameChoices = ["rock", "paper", "scissor"];
 
+const buttons = document.querySelectorAll("button");
+const roundDisplay = document.querySelector("#round");
+const userScoreDisplay = document.querySelector(".user-score");
+const compScoreDisplay = document.querySelector(".comp-score");
+const resultDisplay = document.querySelector("#result");
+const resetBtn = document.querySelector(".reset-btn");
+
+let round = 1;
+let userScore = 0;
+let compScore = 0;
+
+function updateScore() {
+  userScoreDisplay.textContent = userScore;
+  compScoreDisplay.textContent = compScore;
+}
+
+function updateRound() {
+  roundDisplay.textContent = round;
+}
+
+updateRound();
+updateScore();
+
+buttons.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    if (round < 6) {
+      const playerSelection = e.target.className;
+      console.log(playerSelection);
+      game(playerSelection);
+      updateRound();
+      round++;
+      console.log(round);
+      if (round > 5) {
+        console.log(round);
+        round++;
+        const finalResult = printResult(compScore, userScore);
+        roundDisplay.textContent = "GAME ENDS";
+        resultDisplay.textContent = finalResult;
+        resetBtn.classList.toggle("reset-btn");
+        resetBtn.addEventListener("click", reset);
+      }
+    }
+  });
+});
+
 function computerPlay() {
   const randomCompChoice = Math.floor(Math.random() * 3);
   return gameChoices[randomCompChoice];
 }
 
-function userInput() {
-  let isCorrectChoice = false;
-  while (!isCorrectChoice) {
-    let playerInput = prompt(
-      "What would player like to play? Look console for results"
-    ).toLowerCase();
-    if (!gameChoices.includes(playerInput)) {
-      console.log(`Wrong input!!! Try again with Rock or paper or scissor`);
-    } else {
-      isCorrectChoice = true;
-      return playerInput;
-    }
-  }
-}
-
-function playGame() {
-  const playerSelection = userInput();
+function playGame(playerSelection) {
   const computerSelection = computerPlay();
   if (playerSelection === computerSelection) {
     return `Both played ${playerSelection}, Tied!!!`;
@@ -30,35 +59,38 @@ function playGame() {
     (playerSelection === "paper" && computerSelection === "scissor") ||
     (playerSelection === "scissor" && computerSelection === "rock")
   ) {
-    return `You Lose! ${computerSelection} beats ${playerSelection}`;
+    compScore++;
+    updateScore();
+    return `You Lose! ${computerSelection.toUpperCase()} beats ${playerSelection.toUpperCase()}`;
   } else {
-    return `You Win! ${playerSelection} beats ${computerSelection}`;
+    userScore++;
+    updateScore();
+    return `You Win! ${playerSelection.toUpperCase()} beats ${computerSelection.toUpperCase()}`;
   }
 }
 
 function printResult(compScore, userScore) {
   if (compScore > userScore) {
-    console.log("Computer won!!! Better Luck Next Time.");
+    return "Computer won!!! Better Luck Next Time.";
   } else if (compScore < userScore) {
-    console.log("You won!!! You are a HERO!!!.");
+    return "You won!!! You are a HERO!!!.";
   } else {
-    console.log("Both are tied!!! Try again later.");
+    return "Both are tied!!! Try again later.";
   }
 }
 
-const game = function game() {
-  let compScore = 0;
-  let userScore = 0;
-  for (let i = 0; i < 5; i++) {
-    const result = playGame();
-    console.log(result);
-    if (result[4] === "L") {
-      compScore++;
-    } else if (result[4] === "W") {
-      userScore++;
-    } // Getting the letter L or W of Lose or Win to determine the score.
-  }
-  printResult(compScore, userScore);
-};
+function game(userInput) {
+  const result = playGame(userInput);
+  resultDisplay.textContent = result;
+}
 
-// game();
+function reset() {
+  resetBtn.classList.toggle("reset-btn");
+  compScore = 0;
+  userScore = 0;
+  round = 1;
+  resultDisplay.textContent =
+    "Press any option to start a 5 round game with the mighty COMPUTER!!!";
+  updateScore();
+  updateRound();
+}

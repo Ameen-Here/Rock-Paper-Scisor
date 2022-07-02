@@ -15,9 +15,9 @@
   <body>
     <h1>Rock-Paper-Scissor game</h1>
     <div class="score-header">
-      <h2 class="user-header">User Score: <span class="user-score"></span></h2>
+      <h2 class="user-header">User Score: <span class="user-score">0</span></h2>
       <h2 class="comp-header">
-        Computer Score: <span class="comp-score"></span>
+        Computer Score: <span class="comp-score">0</span>
       </h2>
     </div>
 
@@ -28,9 +28,14 @@
     </main>
     <br />
     <br />
-    <h3 id="result">Computer played result</h3>
+    <h3 id="result">
+      Press any option to start a 5 round game with the mighty COMPUTER!!!
+    </h3>
 
-    <h3 id="round">Round</h3>
+    <h3>Round: <span id="round"></span></h3>
+    <div class="reset-container">
+      <button class="reset-btn">START A NEW GAME</button>
+    </div>
 
     <script src="app.js"></script>
   </body>
